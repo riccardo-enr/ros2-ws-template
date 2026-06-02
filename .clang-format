@@ -1,0 +1,61 @@
+---
+Language: Cpp
+BasedOnStyle: Google
+
+# ROS 2 Standard Indentation & Column Limit
+IndentWidth: 2
+AccessModifierOffset: -2
+ColumnLimit: 100
+TabWidth: 2
+UseTab: Never
+
+# Code Alignment & Layout
+AlignAfterOpenBracket: Align
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignOperands: true
+AlignTrailingComments: true
+
+# Brace Wrapping Rules (ROS 2 uses Attach style for most blocks)
+BreakBeforeBraces: Attach
+AllowShortBlocksOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+
+# Pointer/Reference Alignment (ROS 2 style prefers space before the name: int *ptr)
+PointerAlignment: Right
+
+# Spaces and Padding
+SpacesBeforeTrailingComments: 2
+SpaceAfterCStyleCast: false
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
+
+# Namespace rules
+FixNamespaceComments: true
+CompactNamespaces: false
+
+# Include Blocks Configuration (Crucial for a clean rclcpp/msg layout)
+IncludeBlocks: Regroup
+IncludeCategories:
+  # 1. Main header matching the source file
+  - Regex:           '^"([^/]+/)*[^/]+\.hpp"'
+    Priority:        1
+  # 2. Local workspace package headers
+  - Regex:           '^"[^.]+\.hpp"'
+    Priority:        2
+  # 3. Standard ROS 2 / rclcpp ecosystem headers
+  - Regex:           '^(<|")rclcpp/.*'
+    Priority:        3
+  # 4. ROS 2 Generated Messages / Services / Actions
+  - Regex:           '^(<|")[a-zA-Z0-9_]+_(msgs|srvs|actions)/.*'
+    Priority:        4
+  # 5. Other system/third-party dependencies (e.g., Eigen, OpenCV, OMPL)
+  - Regex:           '^(<|")(std_msgs|geometry_msgs|sensor_msgs|nav_msgs|tf2|tf2_ros)/.*'
+    Priority:        5
+  # 6. Standard C/C++ Libraries
+  - Regex:           '^<[a-z_]+>'
+    Priority:        6
+...
